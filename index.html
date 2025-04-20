@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DeepFake Detection</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #eee;
+      text-align: center;
+      padding-top: 100px;
+    }
+    input[type="file"] {
+      margin: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #0066ff;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0051cc;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #00ff99;
+    }
+  </style>
+</head>
+<body>
+  <h1>DeepFake Detection</h1>
+  <form id="uploadForm">
+    <input type="file" name="file" id="fileInput" accept="image/*" required>
+    <button type="submit">Upload Image</button>
+  </form>
+  <div id="result"></div>
+  <script>
+    const form = document.getElementById('uploadForm');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const fileInput = document.getElementById('fileInput');
+      const formData = new FormData();
+      formData.append('file', fileInput.files[0]);
+
+      fetch('/predict', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if(data.label){
+          document.getElementById('result').innerHTML = 
+            `Prediction: ${data.label}<br>Confidence: ${(data.confidence*100).toFixed(2)}%`;
+        } else if(data.error){
+          document.getElementById('result').innerHTML = `Error: ${data.error}`;
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('result').innerHTML = 'Error processing request.';
+      });
+    });
+  </script>
+</body>
+</html>
