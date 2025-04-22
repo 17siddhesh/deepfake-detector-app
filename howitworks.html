@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Deepfake Detector - How It Works</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #eee;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #222;
+      padding: 15px;
+      text-align: center;
+    }
+    nav a {
+      color: #00ff99;
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 18px;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {
+      padding: 30px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1.2em;
+      max-width: 700px;
+      margin: 20px auto;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('detector') }}">Detector</a>
+      <a href="{{ url_for('awareness') }}">Awareness</a>
+      <a href="{{ url_for('about') }}">About</a>
+      <a href="{{ url_for('howitworks') }}">How It Works</a>
+      <a href="{{ url_for('contact') }}">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <h1>How Our Deepfake Detector Works</h1>
+    <p>
+      Our tool uses a combination of deep learning and image processing to identify manipulated media. When a user uploads content:
+    </p>
+    <p>
+      <strong>1. Upload:</strong> The media file is received via our Detector page.
+    </p>
+    <p>
+      <strong>2. Pre-processing:</strong> Using computer vision techniques, the file is pre-processed to enhance quality and isolate key features.
+    </p>
+    <p>
+      <strong>3. Analysis:</strong> The processed data is fed into our TensorFlow model which analyzes the content and detects signs of manipulation.
+    </p>
+    <p>
+      <strong>4. Results:</strong> The analysis results are displayed, indicating the authenticity of the media.
+    </p>
+  </main>
+</body>
+</html>
